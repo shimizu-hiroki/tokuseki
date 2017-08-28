@@ -1,8 +1,0 @@
-{
-    "require": {
-        "silex/silex": "^1.3",
-        "predis/predis": "1.0.3",
-        "heroku/heroku-buildpack-php": "*"
-    }
-}
-
