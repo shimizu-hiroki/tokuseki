@@ -1,4 +1,4 @@
-﻿$accessToken = ‘ LINEのアクセストークン’;
+﻿$accessToken = ‘gXjFBRpxI1c0n8bXUqYQW5m5k9VNuVA6ufGB7Az5RjnDdWQcrYpx5tMXrxyq+R2PLWg2f7rcFAWloEfRgHel3YL+LiRTI8hyFQgMEK0u3gDV+hA4AXFJJIGz1IOZRDsbBPe0/kdUm132IYCtyrB68QdB04t89/1O/w1cDnyilFU=’;
  
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
