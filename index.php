@@ -82,55 +82,25 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 
         switch ($msg_text) {
-            case 'あそぼ':
+            case 'ガソリンスタンド':
 
-                $reply_text = '昼休みは部室で勉強って約束したやん？';
-
-                break;
-
-            case 'ウソ':
-
-                $reply_text = 'ウソつくとワシワシするよ！';
+                $reply_text = '最寄りのガソリンスタンドはここをチェック！';
 
                 break;
 
-            case 'カード':
+            case '配達':
 
-                $reply_text = 'カードがウチにそう告げるんや！！！';
+                $reply_text = '配達を希望ですか？';
+
+                break;
+
+            case '太陽光':
+
+                $reply_text = '太陽光発電の見積もりもやってます！詳しくはここをチェック';
 
                 break;
         }
-    } else {
-
-        // パターンで返すシンプルなボット(4パターン程度)
-
-        switch ($msg_text) {
-
-            case 'あそぼ':
-
-                $reply_text = '昼休みは部室で勉強って約束したやん？';
-
-                break;
-
-            case 'ウソ':
-
-                $reply_text = 'ウソつくとワシワシするよ！';
-
-                break;
-
-            case 'カード':
-
-                $reply_text = 'カードがウチにそう告げるんや！！！';
-
-                break;
-            default:
-
-                $reply_text = 'やってみればええやん。特に理由なんて必要ない。やりたいからやってみる。本当にやりたいことって、そんな感じに始まるんやない？';
-
-                break;
-
-        }
-   }
+    }
 
 
 
@@ -220,25 +190,22 @@ function dialogue($message, $context) {
 
         'context' => $context,
 
-        'nickname' => '希',
+        'nickname' => 'トクセキ君',
 
-        'nickname_y' => 'ノゾミ',
 
-        'sex' => '女',
+        'sex' => '男',
 
-        'bloodtype' => 'O',
+        'bloodtype' => 'AB',
 
-        'birthdateM' => '6',
+        'birthdateM' => '12',
 
-        'birthdateD' => '9',
+        'birthdateD' => '31',
 
-        'age' => '17',
+        'age' => '19',
 
-        'constellations' => '双子座',
+        'constellations' => 'やぎ座',
 
-        'place' => '東京',
-
-        't' => '20'
+        'place' => '徳島県'
 
     ];
 
