@@ -1,76 +1,60 @@
-<?php
+ï»¿$accessToken = â€˜gXjFBRpxI1c0n8bXUqYQW5m5k9VNuVA6ufGB7Az5RjnDdWQcrYpx5tMXrxyq+R2PLWg2f7rcFAWloEfRgHel3YL+LiRTI8hyFQgMEK0u3gDV+hA4AXFJJIGz1IOZRDsbBPe0/kdUm132IYCtyrB68QdB04t89/1O/w1cDnyilFU=â€™;
+ 
+//ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—
+$json_string = file_get_contents('php://input');
+$jsonObj = json_decode($json_string);
+ 
+$type = $jsonObj--->{"events"}[0]->{"message"}->{"type"};
+$text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
+$replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
+ 
+ 
+//ãƒ‰ã‚³ãƒ¢ã®é›‘è«‡ãƒ‡ãƒ¼ã‚¿å–å¾—
+$response = chat($text);
+ 
+$response_format_text = [
+    "type" => "text",
+    "text" =>  $response
+  ];
+ 
+$post_data = [
+	"replyToken" => $replyToken,
+	"messages" => [$response_format_text]
+	];
+ 
+$ch = curl_init("https://api.line.me/v2/bot/message/reply");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json; charser=UTF-8',
+    'Authorization: Bearer ' . $accessToken
+    ));
+$result = curl_exec($ch);
+curl_close($ch);
+ 
+ 
+//ãƒ‰ã‚³ãƒ¢ã®é›‘è«‡APIã‹ã‚‰é›‘è«‡ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
+function chat($text) {
+    // docomo chatAPI
+    $api_key = â€˜3378495a422f7a623734512f4e544631636949792f4a6475383834592e79704c796353587a443053515343â€™;
+    $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
+    $req_body = array('utt' => $text);
+    
+    $headers = array(
+        'Content-Type: application/json; charset=UTF-8',
+    );
+    $options = array(
+        'http'=>array(
+            'method'  => 'POST',
+            'header'  => implode("\r\n", $headers),
+            'content' => json_encode($req_body),
+            )
+        );
+    $stream = stream_context_create($options);
+    $res = json_decode(file_get_contents($api_url, false, $stream));
+ 
+    return $res->utt;
 
-require_once('/app/vendor/autoload.php');
-use jp3cki\docomoDialogue\Dialogue;
-
-// ƒAƒJƒEƒ“ƒgî•ñÝ’è
-$channelId     = getenv('1527557686');
-$channelSecret = getenv('68979386d4e8c6263d172e5f8566f78e');
-$mid           = getenv('Ud96a886405f4b15a188a542b48d0004c');
-$proxy         = getenv('http://fixie:wMlsf0B1PWg21Fh@velodrome.usefixie.com:80');
-$docomoApiKey  = getenv('3378495a422f7a623734512f4e544631636949792f4a6475383834592e79704c796353587a443053515343');
-$redisUrl      = getenv('redis://h:p86b813a1f6e7c3e3e578ebe416e968ef6d52a0c18ea7aa6cd0aa32f130dfcf51@ec2-34-230-117-175.compute-1.amazonaws.com:54169');
-
-// ƒƒbƒZ[ƒWŽóM
-$json_string  = file_get_contents('php://input');
-$json_object  = json_decode($json_string);
-$content      = $json_object->result{0}->content;
-$text         = $content->text;
-$from         = $content->from;
-$message_id   = $content->id;
-$content_type = $content->contentType;
-
-// $context‚ÌÝ’è
-$redis   = new Predis\Client($redisUrl);
-$context = $redis->get($from);
-
-$dialog = new Dialogue($docomoApiKey);
-
-//Docomo  ‘—Mƒpƒ‰ƒ[ƒ^‚Ì€”õ
-$dialog->parameter->reset();
-$dialog->parameter->utt = $text;
-$dialog->parameter->t = 20;
-$dialog->parameter->context = $context;
-$dialog->parameter->mode = $mode;
-
-$ret = $dialog->request();
-
-if ($ret === false) {
-    $text = "’ÊM‚ÉŽ¸”s‚µ‚Ü‚µ‚½";
 }
-
-$text = $ret->utt;
-$redis->set($from, $ret->context);
-
-$post = <<< EOM
-{
-    "to":["{$from}"],
-    "toChannel":1383378250,
-    "eventType":"138311608800106203",
-    "content":{
-        "toType":1,
-        "contentType":1,
-        "text": "{$text}"
-    }
-}
-EOM;
-
-$headers = array(
-    "Content-Type: application/json",
-    "X-Line-ChannelID: {$channelId}",
-    "X-Line-ChannelSecret: {$channelSecret}",
-    "X-Line-Trusted-User-With-ACL: {$mid}"
-);
-
-$url = "https://trialbot-api.line.me/v1/events";
-
-$curl = curl_init($url);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-//ƒvƒƒLƒVŒo—Rƒtƒ‰ƒO
-curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, 1);
-//ƒvƒƒLƒVÝ’è
-curl_setopt($curl, CURLOPT_PROXY, $proxy);
-$output = curl_exec($curl);
