@@ -6,6 +6,7 @@ use jp3cki\docomoDialogue\Dialogue;
 // アカウント情報設定
 $channelId     = getenv('1527557686');
 $channelSecret = getenv('68979386d4e8c6263d172e5f8566f78e');
+$mid           = getenv('Ud96a886405f4b15a188a542b48d0004c');
 $proxy         = getenv('http://fixie:wMlsf0B1PWg21Fh@velodrome.usefixie.com:80');
 $docomoApiKey  = getenv('3378495a422f7a623734512f4e544631636949792f4a6475383834592e79704c796353587a443053515343');
 $redisUrl      = getenv('redis://h:p86b813a1f6e7c3e3e578ebe416e968ef6d52a0c18ea7aa6cd0aa32f130dfcf51@ec2-34-230-117-175.compute-1.amazonaws.com:54169');
@@ -57,7 +58,8 @@ EOM;
 $headers = array(
     "Content-Type: application/json",
     "X-Line-ChannelID: {$channelId}",
-    "X-Line-ChannelSecret: {$channelSecret}"
+    "X-Line-ChannelSecret: {$channelSecret}",
+    "X-Line-Trusted-User-With-ACL: {$mid}"
 );
 
 $url = "https://trialbot-api.line.me/v1/events";
