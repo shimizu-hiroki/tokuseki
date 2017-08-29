@@ -99,12 +99,6 @@ $app->post('/callback', function (Request $request) use ($app) {
                 $reply_text = 'カードがウチにそう告げるんや！！！';
 
                 break;
-            default:
-
-                $reply_text = 'やってみればええやん。特に理由なんて必要ない。やりたいからやってみる。本当にやりたいことって、そんな感じに始まるんやない？';
-
-                break;
-
         }
     } else {
 
