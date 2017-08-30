@@ -80,25 +80,19 @@ $app->post('/callback', function (Request $request) use ($app) {
 
         $reply_text = $response->utt;
 
+	
 
-        switch ($msg_text) {
-            case 'ガソリンスタンド':
+        if (strpos($msg_text, 'ガソリンスタンド')) {
 
-                $reply_text = '最寄りのガソリンスタンドはここをチェック！';
+                $reply_text = '最寄りのガソリンスタンドはここをチェック！' + 'http://www.tokuseki.co.jp/sssearch/sssearch.php';
 
-                break;
+        } else if (strpos($msg_text, '配達')) { 
 
-            case '配達':
+                $reply_text = '灯油配達を希望ですか？それならこちらをご覧ください！' + 'http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php';
 
-                $reply_text = '配達を希望ですか？';
+        } else if (strpos($msg_text, '太陽光')) {
 
-                break;
-
-            case '太陽光':
-
-                $reply_text = '太陽光発電の見積もりもやってます！詳しくはここをチェック';
-
-                break;
+                $reply_text = '太陽光発電の見積もりもやってます！詳しくはここをチェック!' + 'http://www.tokuseki.co.jp/service/solar/solar_order_popup.php';
         }
     }
 
