@@ -84,7 +84,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 	$yes_word_list = array("yes", "はい", "うん", "そうです");
 	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
-	$yes_no_judge = true;
+	$yes_no_judge = 'yes';
 
 	switch ($talk_route) {
 	    case '通常' :
@@ -124,7 +124,7 @@ $app->post('/callback', function (Request $request) use ($app) {
  	       	       }
  	        }
 		
-		if ($yes_no_judge) {
+		if ($yes_no_judge == 'yes') {
 
 			$reply_text = "灯油配達はこちらから申し込むことができます！\n";
 			$reply_text .= "http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php";
