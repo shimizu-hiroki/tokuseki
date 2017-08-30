@@ -82,8 +82,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 	$talk_route = '通常';
 
-	$yes_word_list = array("yes", "はい", "うん", "そうです");
-	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
+
 	$yes_no_judge = true;
 
 
