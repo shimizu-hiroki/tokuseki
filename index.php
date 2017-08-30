@@ -111,11 +111,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 		break;
 
 	　　case '灯油配達' :
-		foreach ($yes_word_list as $yes_word) {
- 		       if (strpos($msg_text, $yes_word) !== false) {
- 	                      $yes_no_judge = 'yes';
- 	       	       }
- 	        }
+		
 		
 		if ($yes_no_judge == 'yes') {
 
