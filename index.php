@@ -80,14 +80,14 @@ $app->post('/callback', function (Request $request) use ($app) {
 
         $reply_text = $response->utt;
 
-	$talk_route = '通常';
+	$talk_route = "通常";
 
 	$yes_word_list = array("yes", "はい", "うん", "そうです");
-	$yes_no_judge = 'no';
+	$yes_no_judge = "no";
 
 	switch ($talk_route) {
 
-                case '通常' :
+                case "通常" :
 
 	        if (strpos($msg_text, 'ガソリンスタンド') !== false || strpos($msg_text, 'ガソスタ') !== false) {
 
@@ -100,7 +100,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 
 	                $reply_text = "灯油配達を希望ですか？";
-			$talk_route = '灯油配達';
+			$talk_route = "灯油配達";
 
 
 	        } else if (strpos($msg_text, '太陽光') !== false || strpos($msg_text, '見積') !== false) {
