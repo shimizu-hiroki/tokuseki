@@ -83,8 +83,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 	$talk_route = '通常';
 
 	$yes_word_list = array("yes", "はい", "うん", "そうです");
-	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
-	$yes_no_judge = 'yes';
+	$yes_no_judge = 'no';
 
 	switch ($talk_route) {
 	    case '通常' :
@@ -113,14 +112,8 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 	　　case '灯油配達' :
 		foreach ($yes_word_list as $yes_word) {
- 		       if (stripos($msg_text, $yes_word) !== false) {
+ 		       if (strpos($msg_text, $yes_word) !== false) {
  	                      $yes_no_judge = 'yes';
- 	       	       }
- 	        }
-
-		foreach ($no_word_list as $no_word) {
-		       if (stripos($msg_text, $no_word) !== false) {
- 	                      $yes_no_judge = 'no';
  	       	       }
  	        }
 		
