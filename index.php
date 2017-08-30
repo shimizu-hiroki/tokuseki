@@ -110,6 +110,33 @@ $app->post('/callback', function (Request $request) use ($app) {
 			$reply_text .= "http://www.tokuseki.co.jp/service/solar/solar_order_popup.php";
 	        }
 		break;
+
+	　　case '灯油配達' :
+		foreach ($yes_word_list as $yes_word) {
+ 		       if (stripos($msg_text, $yes_word) !== false) {
+ 	                      $yes_no_judge = true;
+ 	       	       }
+ 	        }
+
+		foreach ($no_word_list as $no_word) {
+		       if (stripos($msg_text, $no_word) !== false) {
+ 	                      $yes_no_judge = false;
+ 	       	       }
+ 	        }
+		
+		if ($yes_no_judge == 'yes') {
+
+			$reply_text = "灯油配達はこちらから申し込むことができます！\n";
+			$reply_text .= "http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php";
+			$talk_route = '';
+
+		} else {
+
+			$reply_text = "ほんとは灯油配達希望ですよね？";
+
+		}
+		break;
+
         }
     }
 
