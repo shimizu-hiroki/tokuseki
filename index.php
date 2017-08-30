@@ -111,31 +111,31 @@ $app->post('/callback', function (Request $request) use ($app) {
 	        }
 		break;
 
-	　　case '灯油配達' :
-		foreach ($yes_word_list as $yes_word) {
- 		       if (strpos($msg_text, $yes_word) !== false) {
- 	                      $yes_no_judge = true;
- 	       	       }
- 	        }
+	　　//case '灯油配達' :
+		//foreach ($yes_word_list as $yes_word) {
+ 		//       if (strpos($msg_text, $yes_word) !== false) {
+ 	        //              $yes_no_judge = true;
+ 	       	//       }
+ 	       // }
 
-		foreach ($no_word_list as $no_word) {
- 		       if (strpos($msg_text, $no_word) !== false) {
- 	                      $yes_no_judge = false;
- 	       	       }
- 	        }
+//		foreach ($no_word_list as $no_word) {
+// 		       if (strpos($msg_text, $no_word) !== false) {
+// 	                      $yes_no_judge = false;
+// 	       	       }
+// 	        }
 		
-		if ($yes_no_judge) {
+//		if ($yes_no_judge) {
 
-			$reply_text = "灯油配達はこちらから申し込むことができます！\n";
-			$reply_text .= "http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php";
-			$talk_route = '';
+//			$reply_text = "灯油配達はこちらから申し込むことができます！\n";
+//			$reply_text .= "http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php";
+//			$talk_route = '';
 
-		} else {
+//		} else {
 
-			$reply_text = "ほんとは灯油配達希望ですよね？";
+//			$reply_text = "ほんとは灯油配達希望ですよね？";
 
-		}
-		break;
+//		}
+//		break;
 
         }
     }
