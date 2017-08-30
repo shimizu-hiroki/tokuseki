@@ -82,26 +82,27 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 	$talk_route = '通常';
 
-
+	$yes_word_list = array("yes", "はい", "うん", "そうです");
+	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
 	$yes_no_judge = true;
 
 
 
-	        if (strpos($msg_text, 'ガソリンスタンド') !== false || strpos($msg_text, 'ガソスタ') !== false) {
+	        if (strpos($msg_text, 'ガソリンスタンド') !== false) {
 
 
 	                $reply_text = "最寄りのガソリンスタンドはここをチェック！\n";
 			$reply_text .= "http://www.tokuseki.co.jp/sssearch/sssearch.php";
 
 
-	        } else if (strpos($msg_text, '配達') !== false || strpos($msg_text, '灯油') !== false) { 
+	        } else if (strpos($msg_text, '配達') !== false) { 
 
 
 	                $reply_text = "灯油配達を希望ですか？";
 			$talk_route = '灯油配達';
 
 
-	        } else if (strpos($msg_text, '太陽光') !== false || strpos($msg_text, '見積') !== false) {
+	        } else if (strpos($msg_text, '太陽光') !== false) {
 
 
 	                $reply_text = "太陽光発電の見積もりもやってます！\n詳しくはこちらをチェック!\n";
