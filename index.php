@@ -80,25 +80,64 @@ $app->post('/callback', function (Request $request) use ($app) {
 
         $reply_text = $response->utt;
 
+	$talk_route = '通常';
+
+	$yes_word_list = array("yes", "はい", "うん", "そうです");
+	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
+	$yes_no_judge = true;
+
+	switch ($talk_route) {
+	    case '通常' :
+
+	        if (strpos($msg_text, 'ガソリンスタンド') !== false || strpos($msg_text, 'ガソスタ') !== false) {
 
 
-	        if (strpos($msg_text, 'ガソリンスタンド') !== false) {
-
-          	      $reply_text = '最寄りのガソリンスタンドはここをチェック！\n';
-			$reply_text .= 'http://www.tokuseki.co.jp/sssearch/sssearch.php';
-
-	        } else if (strpos($msg_text, '配達') !== false) { 
-
-          	      $reply_text = '灯油配達を希望ですか？それならこちらをご覧ください！\n';
-			$reply_text .= 'http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php';
+	                $reply_text = "最寄りのガソリンスタンドはここをチェック！\n";
+			$reply_text .= "http://www.tokuseki.co.jp/sssearch/sssearch.php";
 
 
-	        } else if (strpos($msg_text, '太陽光') !== false) {
+	        } else if (strpos($msg_text, '配達') !== false || strpos($msg_text, '灯油') !== false) { 
+
+
+	                $reply_text = "灯油配達を希望ですか？";
+			$talk_route = '灯油配達';
+
+
+	        } else if (strpos($msg_text, '太陽光') !== false || strpos($msg_text, '見積') !== false) {
+
 
 	                $reply_text = "太陽光発電の見積もりもやってます！\n詳しくはこちらをチェック!\n";
 			$reply_text .= "http://www.tokuseki.co.jp/service/solar/solar_order_popup.php";
 	        }
+		break;
 
+	　　case '灯油配達' :
+		foreach ($yes_word_list as $yes_word) {
+ 		       if (strpos($msg_text, $yes_word) !== false) {
+ 	                      $yes_no_judge = true;
+ 	       	       }
+ 	        }
+
+		foreach ($no_word_list as $no_word) {
+		       if (strpos($msg_text, $no_word) !== false) {
+ 	                      $yes_no_judge = false;
+ 	       	       }
+ 	        }
+		
+		if ($yes_no_judge) {
+
+			$reply_text = "灯油配達はこちらから申し込むことができます！\n";
+			$reply_text .= "http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php";
+			$talk_route = '';
+
+		} else {
+
+			$reply_text = "ほんとは灯油配達希望ですよね？";
+
+		}
+		break;
+
+        }
     }
 
 
