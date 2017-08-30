@@ -80,14 +80,14 @@ $app->post('/callback', function (Request $request) use ($app) {
 
         $reply_text = $response->utt;
 
-	$talk_route = '';
+	$talk_route = '通常';
 
-	$yes_word_list = array('yes', 'はい', 'うん', 'そうです');
-	$no_word_list = array('no', 'いいえ', 'ううん', 'ちがいます');
+	$yes_word_list = array("yes", "はい", "うん", "そうです");
+	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
 	$yes_no_judge = true;
 
 	switch ($talk_route) {
-	    case '' :
+	    case '通常' :
 
 	        if (strpos($msg_text, 'ガソリンスタンド') !== false || strpos($msg_text, 'ガソスタ') !== false) {
 
