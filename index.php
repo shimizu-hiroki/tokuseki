@@ -82,15 +82,15 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 	
 
-        if (strpos($msg_text, 'ガソリンスタンド')) {
+        if (strpos($msg_text, 'ガソリンスタンド') !== false) {
 
                 $reply_text = '最寄りのガソリンスタンドはここをチェック！' + 'http://www.tokuseki.co.jp/sssearch/sssearch.php';
 
-        } else if (strpos($msg_text, '配達')) { 
+        } else if (strpos($msg_text, '配達') !== false) { 
 
                 $reply_text = '灯油配達を希望ですか？それならこちらをご覧ください！' + 'http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php';
 
-        } else if (strpos($msg_text, '太陽光')) {
+        } else if (strpos($msg_text, '太陽光') !== false) {
 
                 $reply_text = '太陽光発電の見積もりもやってます！詳しくはここをチェック!' + 'http://www.tokuseki.co.jp/service/solar/solar_order_popup.php';
         }
