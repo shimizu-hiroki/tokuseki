@@ -87,7 +87,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 	$yes_no_judge = true;
 
 	switch ($talk_route) {
-	    case '' {
+	    case '' :
 
 	        if (strpos($msg_text, 'ガソリンスタンド') !== false || strpos($msg_text, 'ガソスタ') !== false) {
 
@@ -110,9 +110,8 @@ $app->post('/callback', function (Request $request) use ($app) {
 			$reply_text .= "http://www.tokuseki.co.jp/service/solar/solar_order_popup.php";
 	        }
 		break;
-	    } 
 
-	　　case '灯油配達' {
+	　　case '灯油配達' :
 		foreach ($yes_word_list as $yes_word) {
  		       if (strpos($msg_text, $yes_word) !== false) {
  	                      $yes_no_judge = true;
@@ -137,8 +136,6 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 		}
 		break;
-
-	    }
 
         }
     }
