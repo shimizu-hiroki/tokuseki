@@ -86,18 +86,29 @@ $app->post('/callback', function (Request $request) use ($app) {
 	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
 	$yes_no_judge = 'yes';
 
+<<<<<<< HEAD
 
 
 	        if (strpos($msg_text, 'ガソリンスタンド') !== false) {
+=======
+                $reply_text = '最寄りのガソリンスタンドはここをチェック！\n';
+		$reply_text .= 'http://www.tokuseki.co.jp/sssearch/sssearch.php';
+>>>>>>> parent of da1213d... 20170830_06
 
 
+<<<<<<< HEAD
 	                $reply_text = "最寄りのガソリンスタンドはここをチェック！\n";
 			$reply_text .= "http://www.tokuseki.co.jp/sssearch/sssearch.php";
 
 
 	        } else if (strpos($msg_text, '配達') !== false) { 
+=======
+                $reply_text = '灯油配達を希望ですか？それならこちらをご覧ください！\n';
+		$reply_text .= 'http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php';
+>>>>>>> parent of da1213d... 20170830_06
 
 
+<<<<<<< HEAD
 	                $reply_text = "灯油配達を希望ですか？";
 			$talk_route = '灯油配達';
 
@@ -109,6 +120,11 @@ $app->post('/callback', function (Request $request) use ($app) {
 			$reply_text .= "http://www.tokuseki.co.jp/service/solar/solar_order_popup.php";
 	        }
 
+=======
+                $reply_text = '太陽光発電の見積もりもやってます！\n詳しくはこちらをチェック!\n';
+		$reply_text .='http://www.tokuseki.co.jp/service/solar/solar_order_popup.php';
+        }
+>>>>>>> parent of da1213d... 20170830_06
     }
 
 
