@@ -85,8 +85,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 	$yes_word_list = array("yes", "はい", "うん", "そうです");
 	$yes_no_judge = 'no';
 
-	switch ($talk_route) {
-	    case '通常' :
+	if ($talk_route == '通常') {
 
 	        if (strpos($msg_text, 'ガソリンスタンド') !== false || strpos($msg_text, 'ガソスタ') !== false) {
 
@@ -108,10 +107,8 @@ $app->post('/callback', function (Request $request) use ($app) {
 	                $reply_text = "太陽光発電の見積もりもやってます！\n詳しくはこちらをチェック!\n";
 			$reply_text .= "http://www.tokuseki.co.jp/service/solar/solar_order_popup.php";
 	        }
-		break;
-
-	　　case '灯油配達' :
 		
+　　　　　} else if ($talk_route == '灯油配達') {
 		
 		if ($yes_no_judge == 'yes') {
 
@@ -124,8 +121,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 			$reply_text = "ほんとは灯油配達希望ですよね？";
 
 		}
-		break;
-
+		
         }
     }
 
