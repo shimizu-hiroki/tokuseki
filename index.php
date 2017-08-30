@@ -116,7 +116,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 			$reply_text .= "http://www.tokuseki.co.jp/service/kr_delivery/kr_delivery.php";
 			$talk_route = '';
 
-		} else {
+		} else if ($yes_no_judge == 'no') {
 
 			$reply_text = "ほんとは灯油配達希望ですよね？";
 
@@ -124,7 +124,6 @@ $app->post('/callback', function (Request $request) use ($app) {
 		
         }
     }
-}
 
 
 
