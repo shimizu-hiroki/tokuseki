@@ -84,7 +84,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
 	$yes_word_list = array("yes", "はい", "うん", "そうです");
 	$no_word_list = array("no", "いいえ", "ううん", "ちがいます");
-	$yes_no_judge = true;
+	$yes_no_judge = 'yes';
 
 
 
